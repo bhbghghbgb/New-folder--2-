@@ -18,8 +18,14 @@ public class Documents extends Management<Document> {
         document.setName(scanner.nextLine());
 
         System.out.println("Nhap so luong tac gia: ");
-        Author[] authors = new Author[Integer.parseInt(scanner.nextLine())];
-        document.setAuthors(authors);
+        for (int i = 0; i < Integer.parseInt(scanner.nextLine()); i++)
+        {
+            Authors authors = new Authors();
+            System.out.println("Nhap ma tac gia: ");
+            Author author = new Author(Integer.parseInt(scanner.nextLine()));
+            authors.instance.at(search(author.getId()));
+            document.setAuthors((Author[]) instance.stream().toArray());
+        }
 
         System.out.println("Nhap so luong ban sao: ");
         document.setCopies(Integer.parseInt(scanner.nextLine()));
@@ -39,26 +45,6 @@ public class Documents extends Management<Document> {
         System.out.println("4. So luong ban sao");
         return Integer.parseInt(scanner.nextLine());
     }
-
-    public Author accessInpAuthor() {
-        System.out.println("Nhap ma tac gia: ");
-        Author author = new Author(Integer.parseInt(scanner.nextLine()));
-        System.out.println("Nhap ten tac gia: ");
-        author.setName(scanner.nextLine());
-        System.out.println("Nhap ngo ngu: ");
-        author.setLanguage(Languages.parseLang(scanner.nextLine()));
-        System.out.println("Nhap web: ");
-        author.setWebsite(scanner.nextLine());
-        System.out.println("Nhap ngay sinh: ");
-        author.setBirth(ThoiGian.parseTG(scanner.nextLine()));
-        author.setAddress(scanner.nextLine());
-        System.out.println("Nhap email: ");
-        author.setEmail(scanner.nextLine());
-        System.out.println("Nhap so dien thoai: ");
-        author.setPhone(scanner.nextLine());
-        return author;
-    }
-
 
     @Override
     public Document add() {
@@ -92,7 +78,10 @@ public class Documents extends Management<Document> {
                     System.out.println("Nhap so luong tac gia: ");
                     Author[] authors = new Author[Integer.parseInt(scanner.nextLine())];
                     IntStream.range(0, authors.length).forEach(i -> {
-                        authors[i] = accessInpAuthor();
+                        System.out.println("Nhap ma tac gia: ");
+                        Author author = new Author(Integer.parseInt(scanner.nextLine()));
+                        Authors authors1 = new Authors();
+                        authors[i] = authors1.instance.at(search(author.getId()));
                     });
 
                     document.setAuthors(authors);
