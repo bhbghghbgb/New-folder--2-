@@ -31,6 +31,17 @@ public class Card extends AnyId implements IDataProcess<Card> {
         return expiration;
     }
 
+    public Reader getReader() {
+        return reader;
+    }
+
+    public Card setReader(Reader reader) {
+        this.reader = reader;
+        return this;
+    }
+
+
+
     public Card extendExpiration(KhoangThoiGian ktg) {
         expiration = expiration.plusKhoangThoiGian(ktg);
         return this;
@@ -51,16 +62,21 @@ public class Card extends AnyId implements IDataProcess<Card> {
         ThoiGian creation = ThoiGian.parseTG(inp[1]);
         ThoiGian expiration = ThoiGian.parseTG(inp[2]);
         float price_multiplier = Float.parseFloat(inp[3]);
-        return new Card(id, creation).setExpiration(expiration).setPrice_multiplier(price_multiplier);
+        int id_reader = Integer.parseInt(inp[4]);
+        String name_reader = inp[5];
+        Reader reader = new Reader(id_reader, name_reader);
+        return new Card(id, creation).setExpiration(expiration).setPrice_multiplier(price_multiplier).setReader(reader);
     }
 
     public String toString() {
         return StringHelper.liner(super.toString(),
                 StringHelper.itemer("Price multiplier", price_multiplier),
                 StringHelper.itemer("Creation", creation),
-                StringHelper.itemer("Expiration", expiration));
+                StringHelper.itemer("Expiration", expiration))
+                + reader.toString();
     }
 
     private float price_multiplier = 1.f;
     private ThoiGian creation, expiration;
+    private Reader reader;
 }
