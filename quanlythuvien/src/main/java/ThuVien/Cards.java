@@ -46,6 +46,21 @@ public class Cards extends Management<Card> {
                 card.setExpiration(card.getCreation().modNgay(365));
             }
         }
+        int index = Global.readers.promptSearch();
+        if (index == -1) {
+            System.out.println("Khong tim thay doc gia: ");
+            int p = StringHelper.acceptInput("Them doc gia",
+                    "Thoat");
+            switch (p) {
+                case 1 -> {
+                    Reader reader = Global.readers.add();
+                    Global.readers.instance.push_back(reader);
+                    System.out.println("Them thanh cong doc gia: " + reader.toString());
+                }
+            }
+        } else {
+            card.setReader(Global.readers.instance.at(index));
+        }
         return card;
     }
 

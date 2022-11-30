@@ -3,7 +3,7 @@ package ThuVien;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Global {
+public class Global {//Lưu trữ và quản lý hết các danh sách đối tượng
     public static Authors authors;
     public static Cards cards;
     public static Readers readers;

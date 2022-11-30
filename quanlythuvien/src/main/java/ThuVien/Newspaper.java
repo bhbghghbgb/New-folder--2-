@@ -42,6 +42,8 @@ public class Newspaper extends Document {
         }
         int id = Integer.parseInt(inp[1]);
         String name = inp[2];
+        //Dùng stream of để trả về một gt stream (id tác giả)
+        // r sau đó map với authors, trả về một array author
         Author[] authors = Stream.of(StringHelper.lv1Split(inp[3]))
                 .map(e -> Global.authors.getById(Integer.parseInt(e))).toArray(Author[]::new);
         String editorial = inp[4];

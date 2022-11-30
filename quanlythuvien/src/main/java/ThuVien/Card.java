@@ -63,9 +63,8 @@ public class Card extends AnyId implements IDataProcess<Card> {
         ThoiGian expiration = ThoiGian.parseTG(inp[2]);
         float price_multiplier = Float.parseFloat(inp[3]);
         int id_reader = Integer.parseInt(inp[4]);
-        String name_reader = inp[5];
-        Reader reader = new Reader(id_reader, name_reader);
-        return new Card(id, creation).setExpiration(expiration).setPrice_multiplier(price_multiplier).setReader(reader);
+//        Reader reader = new Reader(id_reader);//Fix sau
+        return new Card(id, creation).setExpiration(expiration).setPrice_multiplier(price_multiplier);
     }
 
     public String toString() {
@@ -78,5 +77,5 @@ public class Card extends AnyId implements IDataProcess<Card> {
 
     private float price_multiplier = 1.f;
     private ThoiGian creation, expiration;
-    private Reader reader;
+    private Reader reader;//Lưu lại thông tin độc giả của mỗi thẻ
 }

@@ -33,7 +33,7 @@ public class Authors extends Management<Author> {
         author.setAddress(StringHelper.acceptLine("Nhap dia chi: "));
         author.setEmail(StringHelper.acceptLine("Nhap email: "));
         author.setPhone(StringHelper.acceptLine("Nhap so dien thoai: "));
-        instance.push_back(author);
+        Global.authors.instance.push_back(author);
         return author;
     }
 

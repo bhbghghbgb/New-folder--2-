@@ -3,6 +3,7 @@ package ThuVien;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import Polyfill.PFArray;
 import Polyfill.StringHelper;
@@ -53,25 +54,37 @@ public class Documents extends Management<Document> {
 
         int soLuongTacGia = Integer.parseInt(StringHelper.acceptLine("Nhap so luong tac gia: "));
         Author[] authors = new Author[soLuongTacGia];
-        IntStream.range(0, authors.length).forEach(i -> {
-            int index = Global.authors.promptSearch();//Tìm kiếm trong Global
-            if (index == -1) {
-                System.out.println("Khong tim thay tac gia: ");
-                int p = StringHelper.acceptInput("Them tac gia moi"
-                        , "Nhap tac gia khac");
-                switch (p) {
-                    case 1 -> Global.authors.instance.push_back(Global.authors.add());
+        for (int i = 0; i < authors.length; ++i) {
+            int userInp = StringHelper.acceptInput("Nhap ma tac gia da co", "Them tac gia moi");
+            boolean run = true;
+            do {
+                switch (userInp) {
+                    case 1 -> {
+                        int index = Global.authors.promptSearch();
+                        if (index == -1) {
+                            System.out.println("Khong tim thay tac gia");
+                        } else {
+                            System.out.println("Da tim thay tac gia: ");
+                            System.out.println(Global.authors.instance.at(index).toString());
+                            authors[i] = Global.authors.instance.at(index);
+                            System.out.println("Them thanh cong");
+                            run = false;
+                        }
+                    }
+                    case 2 -> {
+                        authors[i] = Global.authors.add();
+                        System.out.println("Them thanh cong tac gia: ");
+                        System.out.println(authors[i].toString());
+                        run = false;
+                    }
                 }
-            } else {
-                authors[i] = Global.authors.instance.at(index);
-            }
-        });
+            } while (run);
+        }
         document.setAuthors(authors);
 
         document.setPublication(ThoiGian.parseTG(StringHelper.acceptLine("Nhap thoi gian xuat ban")));
 
         document.setCopies(Integer.parseInt(StringHelper.acceptLine("Nhap so luong ban sao: ")));
-
         return document;
     }
 
@@ -131,11 +144,17 @@ public class Documents extends Management<Document> {
                     System.out.println("Dang thao tac edit tai lieu: ");
                     System.out.println(document.toString());
                     System.out.println("Chon thao tac: ");
-                    switch (m = StringHelper.acceptInput("Ten", "Ngay xuat ban", "So luong ban sao")) {
-                        case 1 -> document.setName(StringHelper.acceptLine("Nhap ten gia: "));
-                        case 2 ->
-                                document.setPublication(ThoiGian.parseTG(StringHelper.acceptLine("Nhap ngay xuat ban: ")));
+                    switch (m = StringHelper.acceptInput("Ten", "Tac gia", "Ngay xuat ban", "So luong ban sao")) {
+                        case 1 -> document.setName(StringHelper.acceptLine("Nhap ten tai lieu: "));
+                        case 2 -> {
+                            Stream.of(document.getAuthors()).map(i -> i.toString()).forEach(i -> System.out.println(i));
+                            int id_change = Integer.parseInt(StringHelper.acceptLine("Nhap ma tac gia muon edit: "));
+
+//                            document.setAuthors()
+                        }
                         case 3 ->
+                                document.setPublication(ThoiGian.parseTG(StringHelper.acceptLine("Nhap ngay xuat ban: ")));
+                        case 4 ->
                                 document.setCopies(Integer.parseInt(StringHelper.acceptLine("Nhap so luong ban sao: ")));
                         default -> {
                             m = -1;
@@ -163,6 +182,8 @@ public class Documents extends Management<Document> {
 //    }
 
     private PFArray<Document> instance;
+
+//    private Authors authors;//Biến này lưu danh sách tác giả của MỖI cuốn sách//fix sau
 
     public static final class Type {
         public static final int MAGAZINE = 1;
