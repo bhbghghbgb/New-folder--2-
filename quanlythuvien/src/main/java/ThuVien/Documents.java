@@ -60,7 +60,7 @@ public class Documents extends Management<Document> {
                 int p = StringHelper.acceptInput("Them tac gia moi"
                         , "Nhap tac gia khac");
                 switch (p) {
-                    case 1 -> authors_instance.instance.push_back(authors_instance.add());
+                    case 1 -> authors_instance.add();
                 }
             } else {
                 authors[i] = authors_instance.instance.at(index);
