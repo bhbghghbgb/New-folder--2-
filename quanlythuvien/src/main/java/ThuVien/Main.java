@@ -46,12 +46,13 @@ public class Main {
 
     public static int load() {
         try {
-            Global.cards = Cards.fromBatchBlob(PFTrim(new PFFileReader("mini-library-manager","quanlythuvien", "data", "List_The.csv").read()));
-            Global.authors = Authors.fromBatchBlob(PFTrim(new PFFileReader("mini-library-manager","quanlythuvien", "data", "List_TacGia.csv").read()));
-            Global.documents = Documents.fromBatchBlob(PFTrim(new PFFileReader("mini-library-manager","quanlythuvien", "data", "List_TaiLieu.csv").read()));
-            Global.readers = Readers.fromBatchBlob(PFTrim(new PFFileReader("mini-library-manager","quanlythuvien", "data", "List_DocGia.csv").read()));
-            Global.cashiers = Cashiers.fromBatchBlob(PFTrim(new PFFileReader("mini-library-manager","quanlythuvien", "data", "List_NhanVien.csv").read()));
-            Global.managers = Managers.fromBatchBlob(PFTrim(new PFFileReader("mini-library-manager","quanlythuvien", "data", "List_QuanLi.csv").read()));
+            Global.cards = Cards.fromBatchBlob(PFTrim(new PFFileReader("quanlythuvien", "data", "List_The.csv").read()));
+            Global.authors = Authors.fromBatchBlob(PFTrim(new PFFileReader("quanlythuvien", "data", "List_TacGia.csv").read()));
+            Global.documents = Documents.fromBatchBlob(PFTrim(new PFFileReader("quanlythuvien", "data", "List_TaiLieu.csv").read()));
+            Global.readers = Readers.fromBatchBlob(PFTrim(new PFFileReader("quanlythuvien", "data", "List_DocGia.csv").read()));
+            Global.cashiers = Cashiers.fromBatchBlob(PFTrim(new PFFileReader("quanlythuvien", "data", "List_NhanVien.csv").read()));
+            Global.managers = Managers.fromBatchBlob(PFTrim(new PFFileReader("quanlythuvien", "data", "List_QuanLi.csv").read()));
+            Global.hoadons = HoaDons.fromBatchBlob(PFTrim(new PFFileReader("quanlythuvien", "data", "List_HoaDon.csv").read()));
             LOGGER.info("Loaded without errors");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Load data error", e);
@@ -64,12 +65,13 @@ public class Main {
 
     public static int save() {
         try {
-            new PFFileWriter("mini-library-manager","quanlythuvien", "data", "List_The_data.csv").write(Global.cards.toBatchBlob());
-            new PFFileWriter("mini-library-manager","quanlythuvien", "data", "List_TacGia_data.csv").write(Global.authors.toBatchBlob());
-            new PFFileWriter("mini-library-manager","quanlythuvien", "data", "List_TaiLieu_data.csv").write(Global.documents.toBatchBlob());
-            new PFFileWriter("mini-library-manager","quanlythuvien", "data", "List_DocGia_data.csv").write(Global.readers.toBatchBlob());
-            new PFFileWriter("mini-library-manager","quanlythuvien", "data", "List_NhanVien_data.csv").write(Global.cashiers.toBatchBlob());
-            new PFFileWriter("mini-library-manager","quanlythuvien", "data", "List_QuanLi_data.csv").write(Global.managers.toBatchBlob());
+            new PFFileWriter("quanlythuvien", "data", "List_The_data.csv").write(Global.cards.toBatchBlob());
+            new PFFileWriter("quanlythuvien", "data", "List_TacGia_data.csv").write(Global.authors.toBatchBlob());
+            new PFFileWriter("quanlythuvien", "data", "List_TaiLieu_data.csv").write(Global.documents.toBatchBlob());
+            new PFFileWriter("quanlythuvien", "data", "List_DocGia_data.csv").write(Global.readers.toBatchBlob());
+            new PFFileWriter("quanlythuvien", "data", "List_NhanVien_data.csv").write(Global.cashiers.toBatchBlob());
+            new PFFileWriter("quanlythuvien", "data", "List_QuanLi_data.csv").write(Global.managers.toBatchBlob());
+            new PFFileWriter("quanlythuvien", "data", "List_HoaDon_data.csv").write(Global.hoadons.toBatchBlob());
             LOGGER.info("Saved without errors");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Save data error", e);
