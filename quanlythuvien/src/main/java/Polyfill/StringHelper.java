@@ -40,12 +40,12 @@ public final class StringHelper {
     // lol why
     public static String liner(Object... lines) {
         return concater("\n", lines);
-    }
+    }//Xuống dòng
 
     // bruh
     public static String spacer(Object... words) {
         return concater(" ", words);
-    }
+    }//Khoảng trắng
 
     // boomer
     public static String itemer(Object key, Object value) {
@@ -53,7 +53,7 @@ public final class StringHelper {
             value = "null";
         }
         return spacer(key + ":", value);
-    }
+    }//in giá tri
 
     // it's kinda weird tho
     public static String concater(String delim, Object... strings) {
@@ -65,7 +65,7 @@ public final class StringHelper {
     }
 
     // well this one is important
-    public static String[] obj2str(Object... objs) {
+    public static String[] obj2str(Object... objs) {//In thông tin của một chuỗi obj
         return Stream.of(objs).map(Object::toString).toArray(String[]::new);
     }
 
