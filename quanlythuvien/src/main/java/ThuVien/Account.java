@@ -31,7 +31,7 @@ public abstract class Account extends People {
         if (oldPassword == null) {//TH không có pass cũ
             oldPassword = "";
         }
-        if (!checkPassword(oldPassword.trim())) {//Nếu pass cũ null hoặc k đúng
+        if (!checkPassword(oldPassword.trim())) {//Nếu pass cũ k null hoặc k đúng
             return false;
         }
         password = newPassword.trim();//trim: loại bỏ các dấu cách

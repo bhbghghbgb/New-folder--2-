@@ -39,7 +39,7 @@ public class HoaDon extends VirtualHoaDon implements IDataProcess<HoaDon> {
         return this;
     }
 
-    public HoaDon edit() {
+    public HoaDon edit() {//
         if (holdings.size() <= 0) {
             System.out.println("Hoa don nay da ket thuc");
         }

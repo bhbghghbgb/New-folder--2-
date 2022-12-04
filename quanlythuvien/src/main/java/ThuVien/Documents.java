@@ -26,7 +26,8 @@ public class Documents extends Management<Document> {
             case Type.FOREIGN_NONTRANSLATED_BOOK -> ForeignNontranslatedBook.fromBlob(e);
             case Type.FOREIGN_TRANSLATED_BOOK -> ForeignTranslatedBook.fromBlob(e);
             default -> {
-                LOGGER.severe(String.format("File read Document Blob type out of range"));
+                LOGGER.severe(String.format("File read Document Blob type out of range"));//severe: Represents serious failure
+//                This method is used to log a SEVERE message
                 yield null;
             }
         }));

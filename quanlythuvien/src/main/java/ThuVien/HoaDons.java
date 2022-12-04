@@ -25,6 +25,7 @@ public class HoaDons extends Management<HoaDon> {
         updateCounter();
     }
 
+    //Nhập hóa đơn ảo r mới xuất ra hóa đơn thật
     @Override
     public HoaDon add() {
         int id = StringHelper.acceptKey("Nhap id hoa don ao (duoc tao boi doc gia)");
@@ -157,6 +158,6 @@ public class HoaDons extends Management<HoaDon> {
         return new HoaDons(inp);
     }
 
-    private PFArray<VirtualHoaDon> virtuals = new PFArray<>();
+    public static PFArray<VirtualHoaDon> virtuals = new PFArray<>();//Danh sách hóa đơn ảo
     private int id_virtuals_counter = 0;
 }

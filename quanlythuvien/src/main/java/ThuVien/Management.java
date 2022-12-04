@@ -31,7 +31,7 @@ public abstract class Management<T extends AnyId & IDataProcess<T>> implements I
         return IntStream.range(0, instance.size()).filter(i -> instance.at(i).getId() == id).findAny().orElse(-1);
     }
 
-    public T getById(int id) {
+    public T getById(int id) {//dùng trong việc đọc id từ file, khởi tao5 ra đối tượng
         return instance.stream().filter(e -> e.getId() == id).findAny().orElse(null);
     }
 

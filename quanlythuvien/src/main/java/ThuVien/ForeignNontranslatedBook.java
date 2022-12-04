@@ -31,7 +31,7 @@ public class ForeignNontranslatedBook extends ForeignBook {
         int id = Integer.parseInt(inp[1]);
         String name = inp[2];
         Author[] authors = Stream.of(StringHelper.lv1Split(inp[3]))
-                .map(e -> Global.authors.getById(Integer.parseInt(e))).toArray(Author[]::new);
+                .map(e -> Global.authors.getById(Integer.parseInt(e))).toArray(Author[]::new);//Loop tìm từng author bằng id
         String publisher = inp[4];
         Language originLanguage = Languages.parseLang(inp[5]);
         ThoiGian publication = ThoiGian.parseTG(inp[6]);

@@ -17,7 +17,7 @@ public class Global {
     public static final Scanner scanner = new Scanner(System.in);
     public static final Random random = new Random();
 
-    public static void identityLookup() {
+    public static void identityLookup() {//Dùng cho tìm kiếm
         System.out.println("Select an identity to lookup:");
         switch (StringHelper.acceptInput("Authors", "Documents", "Readers", "Cashiers", "Managers")) {
             case 1 -> authors.search();

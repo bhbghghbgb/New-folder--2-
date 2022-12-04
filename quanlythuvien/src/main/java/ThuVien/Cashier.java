@@ -117,6 +117,10 @@ public class Cashier extends StaffImpl implements IDataProcess<Cashier>, IDashbo
                 case 7 -> {
                     Global.identityLookup();
                 }
+                default -> {
+                    System.out.println("Input error");
+                    return 0;
+                }
             }
         }
         return 1;

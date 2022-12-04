@@ -39,11 +39,13 @@ public class Reader extends Account implements IDataProcess<Reader>, IDashboard 
             switch (n) {
                 case 1 -> {
                     VirtualHoaDon vhd = Global.hoadons.createVirtual(this);
-                    while (true) {
+                    HoaDons.virtuals.push_back(vhd);
+                    boolean run = true;
+                    while (run) {
                         int dn = Integer.parseInt(StringHelper.acceptLine("Nhap id tai lieu"));
-                        if (dn == 0) {
-                            break;
-                        }
+//                        if (dn == 0) {//Nhập id = 0 để dừng lại
+//                            break;
+//                        }
                         dn = Global.documents.search(dn);
                         if (dn == -1) {
                             System.out.println("Khong tim thay tai lieu");
@@ -54,6 +56,9 @@ public class Reader extends Account implements IDataProcess<Reader>, IDashboard 
                         System.out.println(d.toString());
                         if (!vhd.addBorrows(d)) {
                             System.out.println("Tai lieu khong kha dung cho muon");
+                        }
+                        switch (StringHelper.acceptInput("Muon tiep", "Dung lai")) {
+                            case 2 -> run = false;
                         }
                     }
                     System.out.println("Xem lai danh sach chuan bi muon");
@@ -100,9 +105,9 @@ public class Reader extends Account implements IDataProcess<Reader>, IDashboard 
     }
 
     public String[] toBlob() {
-        return new String[] { String.valueOf(getId()), getUsername(), getPassword(), getName(),
+        return new String[]{String.valueOf(getId()), getUsername(), getPassword(), getName(),
                 getRegistration().toString(), getBirth().toString(), getPhone(), getEmail(), getAddress(),
-                String.valueOf(card.getId()) };
+                String.valueOf(card.getId())};
     }
 
     @Override
