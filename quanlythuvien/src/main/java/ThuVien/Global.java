@@ -1,5 +1,6 @@
 package ThuVien;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,8 +22,8 @@ public class Global {
     public static void identityLookup() {//Dùng cho tìm kiếm
         System.out.println("Select an identity to lookup:");
         switch (StringHelper.acceptInput("Authors", "Documents", "Readers", "Cashiers", "Managers", "HoaDons")) {
-            case 1 -> authors.search();
-            case 2 -> documents.search();
+            case 1 -> Arrays.stream(authors.search()).forEach(e -> System.out.println(e));
+            case 2 -> Arrays.stream(documents.search()).forEach(e -> System.out.println(e));
             case 3 -> readers.search();
             case 4 -> cashiers.search();
             case 5 -> managers.search();

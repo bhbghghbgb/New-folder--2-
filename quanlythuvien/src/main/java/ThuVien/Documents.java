@@ -184,7 +184,8 @@ public class Documents extends Management<Document> {
 
     @Override
     public int[] search() {
-        String query = StringHelper.acceptLine("Nhap ten tai lieu");
+        System.out.println("Nhap ten tai lieu: ");
+        String query = Global.scanner.nextLine();//= StringHelper.accessLine Bỏ hết khoảng trắng rồi lấy gi slit
         String[] entries = query.toLowerCase().split(" ");
         return IntStream.range(0, instance.size()).filter(i -> {
             String[] names = instance.at(i).getName().toLowerCase().split(" ");
