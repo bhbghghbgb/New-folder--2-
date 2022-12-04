@@ -1,5 +1,6 @@
 package ThuVien;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
@@ -45,9 +46,10 @@ public class HoaDons extends Management<HoaDon> {
         System.out.println("Xac nhan thanh toan:");
         int m = StringHelper.acceptInput("Da thu tien", "Chay tron roi");
         if (m == 1) {
-            instance.push_back(toAdd);
+            Global.hoadons.instance.push_back(toAdd);
             virtuals.erase(pos);
             System.out.println("Thanh toan da xac nhan");
+//            Global.hoadons.instance.stream().map(e -> e.toString()).forEach(System.out::println);
             return toAdd;
         }
         System.out.println("Thanh toan huy bo");
@@ -66,11 +68,13 @@ public class HoaDons extends Management<HoaDon> {
             int id;
             switch (StringHelper.acceptInput("ID doc gia", "ID hoa don")) {
                 case 1 -> {
-                    id = Global.readers.promptSearch();
+                    int index = Global.readers.promptSearch();
+                    id = Global.readers.instance.at(index).getId();
                     // trung id doc gia va hoa don van con tai lieu chua tra
-                    HoaDon[] hd = instance.stream()
+                    HoaDon[] hd = Global.hoadons.instance.stream()
                             .filter(e -> e.getCreator().getId() == id && e.getHoldings().size() > 0)
                             .toArray(HoaDon[]::new);
+//                    Arrays.stream(hd).map(e -> e.toString()).forEach(System.out::println);
                     int m = 0;
                     if (hd.length > 1) {
                         System.out.println("Chon trong cac hoa don");
@@ -79,8 +83,8 @@ public class HoaDons extends Management<HoaDon> {
                         }
                     }
                     System.out.println("Dang thuc hien edit hoa don");
-                    System.out.println(hd[m - 1].toString());
-                    toEdit = hd[m - 1].edit();
+                    System.out.println(hd[m].toString());
+                    toEdit = hd[m].edit();
                 }
                 case 2 -> {
                     id = Integer.parseInt(StringHelper.acceptLine("Nhap ID hoa don"));

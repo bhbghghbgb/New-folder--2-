@@ -122,6 +122,6 @@ public class HoaDon extends VirtualHoaDon implements IDataProcess<HoaDon> {
     }
 
     private ThoiGian deadline;
-    private PFArray<Document> holdings = new PFArray<>();
+    private PFArray<Document> holdings = new PFArray<>();//Số lượng tài liệu trong hóa đơn
     public static final int blob_column = 5;
 }
