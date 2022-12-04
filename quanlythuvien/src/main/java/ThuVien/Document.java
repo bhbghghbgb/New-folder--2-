@@ -58,7 +58,7 @@ public abstract class Document extends AnyId implements IDataProcess<Document> {
 
     public Document changeCopies(int copies_offset) {
         if ((copies += copies_offset) < 0) {
-            LOGGER.info(StringHelper.spacer("Document", getId(), "has been purged"));
+            LOGGER.info(StringHelper.spacer("Document", getId(), "has been purged"));//Bị xóa
             copies = 0;
         }
         if (borrowed > copies) {

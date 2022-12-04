@@ -26,7 +26,7 @@ public class Author extends People implements IDataProcess<Author> {
         return this;
     }
 
-    public static Author fromBlob(String[] inp) {
+    public static Author fromBlob(String[] inp) {//Khởi tạo ra độc giả từ một chuỗi String(được lấy từ file List_Author
         int id = Integer.parseInt(inp[0]);
         String name = inp[1];
         ThoiGian borntime = ThoiGian.parseTG(inp[2]);
@@ -41,7 +41,7 @@ public class Author extends People implements IDataProcess<Author> {
         return toRet;
     }
 
-    public String[] toBlob() {
+    public String[] toBlob() {//toString 1 chuỗi
         return new String[] { String.valueOf(getId()), getName(), getBirth().toString(), getPhone(), getEmail(),
                 getAddress(), getWebsite(), getLanguage().toString() };
     }

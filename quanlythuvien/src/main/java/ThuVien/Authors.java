@@ -10,6 +10,7 @@ import Polyfill.ThoiGian;
 
 public class Authors extends Management<Author> {
     private static final Logger LOGGER = Logger.getLogger(Authors.class.getName());
+//   logging is an important feature that helps developers to trace out the errors.
 
     public Authors() {
         super();
@@ -21,8 +22,8 @@ public class Authors extends Management<Author> {
 
     public Authors(PFArray<String[]> blob) {
         this();
-        blob.stream().forEach(e -> instance.push_back(Author.fromBlob(e)));
-        updateCounter();
+        blob.stream().forEach(e -> instance.push_back(Author.fromBlob(e)));//Lập tuần tự trong blob lấy các inp để khởi tạo đối tượng
+        updateCounter();//tự động tạo id
     }
 
     public Author add() {
@@ -45,8 +46,14 @@ public class Authors extends Management<Author> {
             instance.push_back(author);
             return author;
         } catch (RuntimeException e) {
-            LOGGER.log(Level.WARNING, "Likely input parse error in Authors::add", e);
-            LOGGER.info("The adding operation is cancelled");
+//            The code used by the client sends the log request to the Logger objects
+            LOGGER.log(Level.WARNING, "Likely input parse error in Authors::add", e);//WARNING: Potential Problem
+//            It occurs due to user mistake. If a user inputs the wrong credentials, the application shows a warning.
+            LOGGER.info("The adding operation is cancelled");//This method accepts a single parameter String which is the information we want to pass to logs.
+            /*
+            This method is used to log a FINE message. If the logger is enabled for logging FINE level message then
+            the given message is forwarded to all the registered output Handler objects.
+             */
             LOGGER.fine(String.format("Id counter is %d", currentIdCount()));
             return null;
         }
@@ -134,9 +141,9 @@ public class Authors extends Management<Author> {
 
     public int[] search() {
         String query = StringHelper.acceptLine("Nhap ten tac gia");
-        String[] entries = query.toLowerCase().split(" ");
+        String[] entries = query.toLowerCase().split(" ");//Tách ra từng từ trong tên tác giả muốn tìm
         return IntStream.range(0, instance.size()).filter(i -> {
-            String[] names = instance.at(i).getName().toLowerCase().split(" ");
+            String[] names = instance.at(i).getName().toLowerCase().split(" ");//Tách ra từng từ trong tên tác giả trong file
             for (int j = 0; j < names.length; j++) {
                 for (int k = 0; k < entries.length; k++) {
                     if (names[j].startsWith(entries[k])) {
