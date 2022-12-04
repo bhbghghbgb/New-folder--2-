@@ -31,12 +31,12 @@ public abstract class Management<T extends AnyId & IDataProcess<T>> implements I
         return IntStream.range(0, instance.size()).filter(i -> instance.at(i).getId() == id).findAny().orElse(-1);
     }
 
-    public T getById(int id) {
+    public T getById(int id) {//dùng trong việc đọc id từ file, khởi tao5 ra đối tượng
         return instance.stream().filter(e -> e.getId() == id).findAny().orElse(null);
     }
 
     @SuppressWarnings("unchecked")
-    public T[] batchGetByIds(int[] ids) {
+    public T[] batchGetByIds(int[] ids) {//Lấy vào 1 chuỗi các id
         return (T[]) IntStream.of(ids).mapToObj(e -> getById(e)).filter(Objects::nonNull).toArray();
     }
 
@@ -52,7 +52,7 @@ public abstract class Management<T extends AnyId & IDataProcess<T>> implements I
 
     }
 
-    public PFArray<String[]> toBatchBlob() {
+    public PFArray<String[]> toBatchBlob() {//trả về một chuỗi string thông tin của T
         PFArray<String[]> toRet = new PFArray<>(instance.size());
         LOGGER.info(String.format("Blobing %d x %d batch", instance.size(), instance.at(0).toBlob().length));
         // instance.stream().map(T::toBlob).forEach(e -> toRet.push_back(e));

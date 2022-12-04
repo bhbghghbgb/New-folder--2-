@@ -22,7 +22,7 @@ public final class StringHelper {
         if (isNullOrBlank(line)) {
             return new String[0];
         }
-        return lv1Sep.split(line);
+        return lv1Sep.split(line);//Tách chuỗi nếu gặp |
     }
 
     public static String lv1Join(Object... words) {
@@ -55,7 +55,7 @@ public final class StringHelper {
     }
 
     // boomer
-    public static String itemer(Object key, Object value) {
+    public static String itemer(Object key, Object value) {//Ghi ra chuỗi và giá trị
         if (value == null) {
             value = "null";
         }
@@ -63,7 +63,7 @@ public final class StringHelper {
     }
 
     // it's kinda weird tho
-    public static String concater(String delim, Object... strings) {
+    public static String concater(String delim, Object... strings) {//trả về string cách nhau bởi dấu delim
         try {
             return String.join(delim, vararg2str(strings));
         } catch (NullPointerException e) {
@@ -96,7 +96,7 @@ public final class StringHelper {
         return n;
     }
 
-    public static String acceptLine(String prompt) {
+    public static String acceptLine(String prompt) {//In ra, Trả về một scanner để đọc input
         // flushScanner();
         System.out.print(prompt + ": ");
         return Global.scanner.nextLine().trim();
@@ -119,5 +119,10 @@ public final class StringHelper {
     // }
 
     public static final Pattern lv1Sep = Pattern.compile(Pattern.quote("|"));
+    /*
+    Pattern find particular patterns in character sequences
+    fetches and returns the regular expression in the string format, using which the current pattern was compiled.
+
+     */
     public static final Pattern lv2Sep = Pattern.compile(Pattern.quote("\\"));
 }

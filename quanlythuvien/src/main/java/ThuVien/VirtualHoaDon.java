@@ -45,5 +45,5 @@ public class VirtualHoaDon extends AnyId {
     }
 
     private Reader creator;
-    private PFArray<Document> borrows = new PFArray<>();
+    private PFArray<Document> borrows = new PFArray<>();//Danh sách tài liệu mượn
 }

@@ -5,9 +5,9 @@ import java.util.stream.Stream;
 import Polyfill.StringHelper;
 
 public class Languages {
-    public static Language parseLang(String inp) {
+    public static Language parseLang(String inp) {//static gọi không thông qua đối tượng
         String[] names = StringHelper.lv1Split(inp);
-        return Stream.of(list).filter(l -> {
+        return Stream.of(list).filter(l -> {//Lập toàn bộ list lang, of trả về 1 Language, lambda l là 1 language
             for (String n : names) {
                 if (n.equalsIgnoreCase(l.getCode()) || n.equalsIgnoreCase(l.getName())
                         || n.equalsIgnoreCase(l.getTname())) {

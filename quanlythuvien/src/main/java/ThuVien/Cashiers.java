@@ -8,7 +8,7 @@ import Polyfill.PFArray;
 import Polyfill.StringHelper;
 import Polyfill.ThoiGian;
 
-public class Cashiers extends Management<Cashier> implements ILogin {
+public class Cashiers extends Management<Cashier> implements ILogin{
     private static final Logger LOGGER = Logger.getLogger(Cashiers.class.getName());
 
     public Cashiers() {
@@ -199,4 +199,5 @@ public class Cashiers extends Management<Cashier> implements ILogin {
         }
         return new Cashiers(inp);
     }
+
 }

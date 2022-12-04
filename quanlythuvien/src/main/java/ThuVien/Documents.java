@@ -19,14 +19,15 @@ public class Documents extends Management<Document> {
         super(r);
     }
 
-    public Documents(PFArray<String[]> blob) {
+    public Documents(PFArray<String[]> blob) {//Tạo các đối tượng Doc từ một mảng chuỗi String
         blob.stream().forEach(e -> instance.push_back(switch (Integer.parseInt(e[0])) {
             case Type.NEWSPAPER -> Newspaper.fromBlob(e);
             case Type.NATIVE_BOOK -> NativeBook.fromBlob(e);
             case Type.FOREIGN_NONTRANSLATED_BOOK -> ForeignNontranslatedBook.fromBlob(e);
             case Type.FOREIGN_TRANSLATED_BOOK -> ForeignTranslatedBook.fromBlob(e);
             default -> {
-                LOGGER.severe(String.format("File read Document Blob type out of range"));
+                LOGGER.severe(String.format("File read Document Blob type out of range"));//severe: Represents serious failure
+//                This method is used to log a SEVERE message
                 yield null;
             }
         }));

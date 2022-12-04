@@ -36,9 +36,9 @@ public class ThoiGian {
 
     public static ThoiGian parseTG(String inp) {
         if (inp.length() > 10) {
-            return new ThoiGian(LocalDateTime.parse(inp, format_full));
+            return new ThoiGian(LocalDateTime.parse(inp, format_full));//parse: nhận vào 1 chuỗi ngày tháng và 1 format
         } else {
-            return new ThoiGian(LocalDateTime.of(LocalDate.parse(inp, format_min), LocalTime.of(0, 0, 0)));
+            return new ThoiGian(LocalDateTime.of(LocalDate.parse(inp, format_min), LocalTime.of(0, 0, 0)));//of: nhận vào date và time
         }
     }
 
@@ -55,7 +55,7 @@ public class ThoiGian {
         return instance;
     }
 
-    private final LocalDateTime instance;
+    private final LocalDateTime instance;//Lưu trữ thời gian
     private static final DateTimeFormatter format_full = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private static final DateTimeFormatter format_min = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 }
