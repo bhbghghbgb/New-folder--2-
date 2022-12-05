@@ -186,7 +186,7 @@ public class Documents extends Management<Document> {
     public int[] search() {
         String query = StringHelper.acceptLine("Nhap ten tai lieu");
         String[] entries = query.toLowerCase().split(" ");
-        return IntStream.range(0, instance.size()).filter(i -> {
+        return IntStream.range(0, instance.size()).filter(i -> {//Cái này trả về vị trí
             String[] names = instance.at(i).getName().toLowerCase().split(" ");
             for (int j = 0; j < names.length; j++) {
                 for (int k = 0; k < entries.length; k++) {
