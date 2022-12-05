@@ -70,11 +70,22 @@ public class Owner extends Account implements ILogin, IDashboard {
 
     public int login() {
         String username = StringHelper.acceptLine("Nhap ten tai khoan (CEO)");
-        String password = StringHelper.acceptLine("Nhap mat khau");
-        if (username.equalsIgnoreCase(getUsername()) && checkPassword(password)) {
-            System.out.println("Ta la quan dai lao gia");
-            dashboard();
-            return 1;
+        int soLanNhapSai = 5;
+        int i = 0;
+        while (true) {
+            String password = StringHelper.acceptLine("Nhap mat khau");
+            if (!username.equalsIgnoreCase(getUsername()) && !checkPassword(password)) {
+                System.out.println("Nhap sai mat khau");
+                i++;
+                if (soLanNhapSai == i) {
+                    break;
+                }
+            }
+            else if (username.equalsIgnoreCase(getUsername()) && checkPassword(password)) {
+                System.out.println("Ta la quan dai lao gia");
+                dashboard();
+                return 1;
+            }
         }
         System.out.println("Mua lai cua hang gia uu dai ib");
         return 0;
