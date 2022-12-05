@@ -35,8 +35,10 @@ public class Main {
                 return 0;
             }
             if (n == -1) {
+//                System.out.println("Nhap sai, vui long nhap lai yeu cau cua ban");
                 break;
             }
+
             switch (n) {
                 case 5 -> save();
                 default -> loginList[n - 1].login();
