@@ -42,7 +42,9 @@ public class HoaDons extends Management<HoaDon> {
         System.out.println(virtuals.at(pos).toStringMinified());
         HoaDon toAdd = new HoaDon(genNextId(), virtuals.at(pos));
         String ngayTra = StringHelper.acceptLine("Nhap ngay hoan tra (mac dinh 7 ngay)");
-        toAdd.setDeadline(ThoiGian.now().modNgay(StringHelper.isNullOrBlank(ngayTra) ? 7 : Integer.parseInt(ngayTra)));
+        int ngayTraInt = StringHelper.isNullOrBlank(ngayTra) ? 7 : Integer.parseInt(ngayTra);
+        toAdd.setDeadline(ThoiGian.now().modNgay(ngayTraInt));
+        System.out.println(StringHelper.itemer("Thong bao le phi", toAdd.calcBorrowingFee(ngayTraInt)));
         System.out.println("Xac nhan thanh toan:");
         int m = StringHelper.acceptInput("Da thu tien", "Chay tron roi");
         if (m == 1) {
@@ -110,9 +112,25 @@ public class HoaDons extends Management<HoaDon> {
     }
 
     public int[] search() {
-        throw new UnsupportedOperationException("Chuc nang chua duoc code do khong du thoi gian");
+        try {
+            int id;
+            switch (StringHelper.acceptInput("ID doc gia", "ID hoa don")) {
+                case 1 -> {
+                    id = Global.readers.promptSearch();
+                    return IntStream.range(0, instance.size()).filter(i -> instance.at(i).getCreator().getId() == id)
+                            .toArray();
+                }
+                case 2 -> {
+                    id = Integer.parseInt(StringHelper.acceptLine("Nhap ID hoa don"));
+                    return IntStream.range(0, instance.size()).filter(i -> instance.at(i).getId() == id).toArray();
+                }
+            }
+        } catch (RuntimeException e) {
+            LOGGER.log(Level.WARNING, "Likely input parse error in HoaDons::search", e);
+            LOGGER.info("Will yield no result");
+        }
+        return new int[0];
     }
-
     public VirtualHoaDon createVirtual(Reader r) {
         return new VirtualHoaDon(++id_virtuals_counter, r);
     }
