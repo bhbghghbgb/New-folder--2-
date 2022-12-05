@@ -136,14 +136,24 @@ public class Readers extends Management<Reader> implements ILogin {
         }
         System.out.println("Tim thay doc gia");
         System.out.println(instance.at(found).toStringMinified());
-        String password = StringHelper.acceptLine("Nhap mat khau");
-        if (!instance.at(found).checkPassword(password)) {
-            System.out.println("Sai mat khau");
-            return -1;
+        int soLanNhapSai = 5;
+        int i = 0;
+        while (true) {
+            String password = StringHelper.acceptLine("Nhap mat khau");
+            if (!instance.at(found).checkPassword(password)) {
+                System.out.println("Sai mat khau");
+                i++;
+                if (soLanNhapSai == i) {
+                    System.out.println("Nhap sai qua nhieu lan");
+                    break;
+                }
+            } else {
+                System.out.println("Mat khau chinh xac");
+                instance.at(found).dashboard();
+                return found;
+            }
         }
-        System.out.println("Mat khau chinh xac");
-        instance.at(found).dashboard();
-        return found;
+        return -1;
     }
 
     @Override
